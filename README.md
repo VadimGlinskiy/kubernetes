@@ -1,0 +1,2 @@
+# kubernetes
+Мои yaml-манифесты
