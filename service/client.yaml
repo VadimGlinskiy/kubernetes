@@ -19,4 +19,5 @@ spec:
       - name: client
         image: vadimglinsky/http-client:0.0.1
         command: ["./app"]
-        args: ["-url", "http://10.42.0.173:8080", "-interval", "3"]
+        args: ["-url", "http://server-svc:8080/kitten", "-interval", "3"]
+# По имени сервиса идет обращение от клиента на сервер, по порту 8080, каждые 3 секунды
