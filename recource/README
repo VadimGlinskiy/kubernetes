@@ -1,0 +1,25 @@
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
+kubectl apply -f pool.yaml
+
+sudo vim /etc/systemd/system/k3s.service
+
+# ExecStart=/usr/local/bin/k3s \
+#    server \
+#        '--write-kubeconfig-mode' \
+#        '644' \
+#        '-disable=servicelb'
+
+systemctl daemon-reload && systemctl restart k3s
+
+Для теста не хватит текующей утилизации ресурсов и надо будет
+нагрузить приложение с помощью chaos-mesh:
+
+curl -sSL https://mirrors.chaos-mesh.org/v2.6.2/install.sh | bash -s -- --k3s
+
+а потом проверить работу:
+
+kubectl get po -n chaos-mesh
+
+Dashboard будет доступен по External айпишнику, который указан в ямлике svc_????
+айпишник взялся из пула адресов, который
+я выделил через ямлик pool.yaml(это через создание балансировщика metallb)
