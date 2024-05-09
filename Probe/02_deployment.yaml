@@ -32,6 +32,15 @@ spec:
             port: 8086
           initialDelaySeconds: 3
           periodSeconds: 3
+        #Эта проба будет делать httpGet запросы
+        #И если приложение не вернет в указанный
+        #Промежуток времени код 200, оно будет перезапускаться kubelet-ом
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8086
+          initialDelaySeconds: 3
+          periodSeconds: 3
       
 ---
 
