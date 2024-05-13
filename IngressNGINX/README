@@ -1,0 +1,15 @@
+Задеплоить контроллер IngressNGINX:
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+```
+Сначала деплоится 02, затем в этот-же неймспейс деплоится 03(обычный clusterIP)
+чтобы затем настроить на него ingress(04)
+потом нужно посмотреть IP-адрес созданного ingress-controller, это команда:
+```
+kubectl -n playground get ing
+```
+и занести в /etc/hosts запись типа:
+```
+192.168.10.1 playground.akj.ru
+```
+и можно заходить по доменному имени, через http
