@@ -13,3 +13,10 @@ kubectl -n playground get ing
 192.168.10.1 playground.akj.ru
 ```
 и можно заходить по доменному имени, через http
+
+Как работает ingress:
+namespace: home-dev                                namespace: ingress-nginx
+Deployment:                                        deployment:
+Pod App    \           ingress                     Pod Ingress-controller<-\\\\\\\\\\\
+Pod App   <---         Service     <---            Pod Ingress-controller<-------------NodePort/LoadBalancer<------<Внешний трафик
+Pod App    /                                       Pod Ingress-controller<-///////////
