@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-bot
+  namespace: weather-bot
+spec:
+  strategy: 
+    type: RollingUpdate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-bot
+  template:
+    metadata:
+      labels:
+        app: weather-bot
+    spec:
+      containers:
+      - name: app
+        image: vadimglinsky/weather-bot:2.0.0
+        ports:
+        - containerPort: 8080
+          name: web        
+        envFrom:
+          - secretRef:
+              name: env-secret
+        volumeMounts:
+        - name: template-volume
+          mountPath: /template.txt
+          subPath: template.txt                         
+      volumes:
+      - name: template-volume
+        configMap:
+          name: template-cm

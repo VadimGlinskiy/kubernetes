@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: template-cm
+  namespace: weather-bot
+data:
+  template.txt: |
+    🔥 <b>SHIT!</b>
+
+    ℹ️ PM 2.5: {{ .PM25 }}
+
+    ℹ️ PM 10: {{ .PM10 }}
+
+    💬 URL: {{ .URL }}
+
+    BLABLABLA.
